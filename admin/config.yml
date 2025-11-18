@@ -1,6 +1,10 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: cellestium/canismajor
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
 
 media_folder: "images/uploads"      # where uploaded images are stored in the repo
 public_folder: "/images/uploads"    # how the site references them
