@@ -5,7 +5,7 @@ backend:
 media_folder: "images/uploads"      # where uploaded images are stored in the repo
 public_folder: "/images/uploads"    # how the site references them
 
-site_url: "https://YOUR-SITE.netlify.app"  # <-- update after you know your Netlify URL
+site_url: "https://https://rbasnet.com"  # <-- update after you know your Netlify URL
 
 collections:
   # BLOG POSTS
