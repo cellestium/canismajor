@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: notahpspell/canismajor
+  repo: cellestium/canismajor
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
