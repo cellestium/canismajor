@@ -1,4 +1,4 @@
-// Blog list wiring for Netlify CMS + GitHub + Webflow cards
+// Blog wiring for Netlify CMS + GitHub + Webflow cards
 
 // Adjust if your repo changes:
 const GH_USER = "cellestium";
@@ -51,7 +51,7 @@ async function fetchPosts() {
   }
 }
 
-// Very small front matter parser for Netlify CMS style:
+// Very small front matter parser for Netlify CMS style
 //
 // ---
 // title: "My post"
@@ -97,7 +97,7 @@ function parseFrontmatter(content) {
   return post;
 }
 
-// -------- Rendering into your Webflow block --------
+// -------- Rendering into your Webflow blocks --------
 
 // Clone the Webflow card-row and fill it with post data
 function createCardFromTemplate(cardRowTemplate, post) {
@@ -106,10 +106,6 @@ function createCardFromTemplate(cardRowTemplate, post) {
   // Title inside <h3 class="row-heading">
   const titleEl = clone.querySelector("h3.row-heading");
   if (titleEl) titleEl.textContent = post.title;
-
-  // Optional: you can show description if you later add a <p> for it
-  // const descEl = clone.querySelector(".row-text p");
-  // if (descEl && post.description) descEl.textContent = post.description;
 
   // Date in the property-value if you want to show it
   const dateEl = clone.querySelector(".property-value div");
@@ -138,42 +134,82 @@ function createCardFromTemplate(cardRowTemplate, post) {
     }
   }
 
-  // Clickable overlay link
+  // Clickable overlay link (to detail_post.html with slug)
   const link = clone.querySelector(".card-row-item-link");
   if (link) {
-    // We'll wire this to detail_post.html for now; slug comes from front matter or filename
     link.href = `detail_post.html?slug=${encodeURIComponent(post.slug)}`;
   }
 
   return clone;
 }
 
-// Render all posts into the blog list on blog.html
-function renderBlogList(posts) {
-  const wrapper = document.getElementById("blog-list-page");
+// Render posts into a Webflow list wrapper by id (blog page, related section, etc.)
+function renderList(containerId, posts, maxCount) {
+  const wrapper = document.getElementById(containerId);
   if (!wrapper) return;
 
   const list = wrapper.querySelector('[role="list"]');
   if (!list) return;
 
-  // Use the existing card as template
   const cardRowTemplate =
     list.querySelector(".card-row") || list.querySelector(".card-row-item");
   if (!cardRowTemplate) return;
 
-  // Clear list
   list.innerHTML = "";
 
-  posts.forEach((post) => {
+  (posts.slice(0, maxCount || posts.length)).forEach((post) => {
     const card = createCardFromTemplate(cardRowTemplate, post);
     list.appendChild(card);
   });
+}
+
+// Fill a single post page (detail_post.html) based on ?slug=
+function renderSinglePost(posts) {
+  const titleEl = document.getElementById("post-title");
+  const descEl = document.getElementById("post-description");
+  const bodyEl = document.getElementById("post-body");
+
+  // If these elements don't exist, this isn't the detail page; skip
+  if (!titleEl || !bodyEl) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+  if (!slug) {
+    titleEl.textContent = "Post not found";
+    bodyEl.innerHTML = "<p>No post slug provided.</p>";
+    return;
+  }
+
+  const post = posts.find((p) => p.slug === slug);
+  if (!post) {
+    titleEl.textContent = "Post not found";
+    bodyEl.innerHTML = "<p>Sorry, this post could not be loaded.</p>";
+    return;
+  }
+
+  titleEl.textContent = post.title;
+  if (descEl) descEl.textContent = post.description || "";
+
+  // Very basic markdown-ish handling: split by blank lines into paragraphs
+  const html = post.body
+    .split(/\n{2,}/)
+    .map((p) => `<p>${p.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>`)
+    .join("");
+  bodyEl.innerHTML = html;
 }
 
 // -------- Boot --------
 
 document.addEventListener("DOMContentLoaded", async () => {
   const posts = await fetchPosts();
-  renderBlogList(posts);
-});
 
+  // Blog index page (blog.html)
+  renderList("blog-list-page", posts);
+
+  // Single post page (detail_post.html)
+  renderSinglePost(posts);
+
+  // We can later add:
+  // renderList("blog-list-home", posts, 3);
+  // renderList("blog-list-related", relatedPosts, 3);
+});
