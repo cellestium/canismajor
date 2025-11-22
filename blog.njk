@@ -177,94 +177,139 @@
               </div>
             </div>
           </div>
-          <div class="row-wrapper row-wrapper-alt">
-            <div id="w-node-_56b5d544-6fb7-92fa-8d27-06c1cd1e328a-0ea75b72" class="row">
-              <div class="row-item">
-                <div class="row-content row-content-sticky">
-                  <section class="section section-scroll">
-                    <div class="row-content row-content-scroll">
-                     <div class="cards-list-wrapper w-dyn-list" id="blog-list-page">
-                       <div role="list" class="cards-list grid-list-page w-dyn-items">
-                            <div class="card-row-item card-row-item-primary">
-                              <div class="card-row-content card-row-content-page">
-                                <div class="card-row-top card-row-top-blog">
-                                  <div class="row-content">
-                                    <div class="row-text-wrapper">
-                                      <div class="property-content">
-                                        <div class="property-item">
-                                          <div class="property-item-bg property-item-bg-primary"></div>
-                                          <div class="property-item-bg property-item-bg-gradient"></div>
-                                          <div class="property-text-wrapper">
-                                            <div class="property-name">
-                                              <div>Blog Post</div>
-                                            </div>
-                                            <div class="property-value">
-                                              <div>rojan basnet</div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="card-lines-wrapper">
-                                        <div class="lines-component">
-                                          <div class="line line-1"></div>
-                                          <div class="line line-2"></div>
-                                          <div class="line line-3"></div>
-                                          <div class="line line-4"></div>
-                                          <div class="line line-5"></div>
-                                          <div class="line line-6"></div>
-                                          <div class="line line-7"></div>
-                                        </div>
-                                      </div>
-                                      <div class="row-text-wrapper">
-                                        <div class="row-text">
-                                          <h3 class="row-heading"></h3>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="card-row-bottom">
-                                  <div class="card-image-wrapper">
-                                    <div class="card-image-hover"><img alt="" loading="lazy" src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" class="card-image card-image-primary w-dyn-bind-empty"><img alt="" loading="lazy" src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" class="card-image card-image-secondary w-dyn-bind-empty"></div>
-                                    <div class="card-overlay-wrapper">
-                                      <div class="card-overlay-first">
-                                        <div class="card-overlay card-overlay-blog"></div>
-                                      </div>
-                                      <div class="card-overlay-second">
-                                        <div class="card-overlay card-overlay-project"></div>
-                                      </div>
-                                    </div>
-                                    <div class="card-button-wrapper">
-                                      <div class="card-button"><img loading="lazy" src="images/arrow-right-up-long-line-secondary.svg" alt="Arrow Right Up" class="card-button-icon">
-                                        <div class="card-button-absolute"><img loading="lazy" src="images/arrow-right-up-long-line-primary.svg" alt="Arrow Right Up" class="card-button-icon"></div>
-                                      </div>
-                                    </div>
-                                    <div class="card-scroll card-scroll-secondary"></div>
-                                  </div>
-                                  <div class="row-content row-content-button">
-                                    <div class="card-row-text-wrapper">
-                                      <div class="card-row-text">
-                                        <div>Read Post</div>
-                                        <div class="card-icon-wrapper">
-                                          <div class="card-icon-line"></div>
-                                          <div class="card-icon-line card-icon-line-second"></div>
-                                        </div>
-                                      </div>
-                                      <div class="card-row-text card-row-text-absolute">
-                                        <div>Read Post</div>
-                                        <div class="card-icon-wrapper card-icon-wrapper-alt">
-                                          <div class="card-icon-line card-icon-line-alt"></div>
-                                          <div class="card-icon-line card-icon-line-second card-icon-line-alt"></div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <a href="#" class="card-row-item-link card-row-item-link-blog w-inline-block"></a>
-                            </div>
-                          </div>
-                        </div>
+         <div class="cards-list-wrapper w-dyn-list" id="blog-list-page">
+  <div role="list" class="cards-list grid-list-page w-dyn-items">
+
+    {% for post in collections.posts | reverse %}
+    <div role="listitem" class="card-row card-row-page w-dyn-item">
+      <div class="card-row-item card-row-item-primary">
+        <div class="card-row-content card-row-content-page">
+          <div class="card-row-top card-row-top-blog">
+            <div class="row-content">
+              <div class="row-text-wrapper">
+                <div class="property-content">
+                  <div class="property-item">
+                    <div class="property-item-bg property-item-bg-primary"></div>
+                    <div class="property-item-bg property-item-bg-gradient"></div>
+                    <div class="property-text-wrapper">
+                      <div class="property-name">
+                        <div>Blog Post</div> <!-- can stay static -->
+                      </div>
+                      <div class="property-value">
+                        <div>rojan basnet</div> <!-- or add an author field later -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-lines-wrapper">
+                  <div class="lines-component">
+                    <div class="line line-1"></div>
+                    <div class="line line-2"></div>
+                    <div class="line line-3"></div>
+                    <div class="line line-4"></div>
+                    <div class="line line-5"></div>
+                    <div class="line line-6"></div>
+                    <div class="line line-7"></div>
+                  </div>
+                </div>
+                <div class="row-text-wrapper">
+                  <div class="row-text">
+                    <!-- POST TITLE -->
+                    <h3 class="row-heading">
+                      {{ post.data.title }}
+                    </h3>
+                    <!-- OPTIONAL SHORT DESCRIPTION -->
+                    {% if post.data.description %}
+                    <p class="row-paragraph">
+                      {{ post.data.description }}
+                    </p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-row-bottom">
+            <div class="card-image-wrapper">
+              <div class="card-image-hover">
+                <!-- FEATURED IMAGE (PRIMARY) -->
+                {% if post.data.featured_image %}
+                  <img
+                    alt="{{ post.data.title }}"
+                    loading="lazy"
+                    src="{{ post.data.featured_image | url }}"
+                    class="card-image card-image-primary">
+                  <!-- SECONDARY IMAGE (OPTIONAL, CAN DUPLICATE) -->
+                  <img
+                    alt="{{ post.data.title }}"
+                    loading="lazy"
+                    src="{{ post.data.featured_image | url }}"
+                    class="card-image card-image-secondary">
+                {% else %}
+                  <!-- fallback placeholder if no image -->
+                  <img
+                    alt=""
+                    loading="lazy"
+                    src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg"
+                    class="card-image card-image-primary">
+                  <img
+                    alt=""
+                    loading="lazy"
+                    src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg"
+                    class="card-image card-image-secondary">
+                {% endif %}
+              </div>
+
+              <div class="card-overlay-wrapper">
+                <div class="card-overlay-first">
+                  <div class="card-overlay card-overlay-blog"></div>
+                </div>
+                <div class="card-overlay-second">
+                  <div class="card-overlay card-overlay-project"></div>
+                </div>
+              </div>
+
+              <div class="card-button-wrapper">
+                <div class="card-button">
+                  <img loading="lazy" src="images/arrow-right-up-long-line-secondary.svg" alt="Arrow Right Up" class="card-button-icon">
+                  <div class="card-button-absolute">
+                    <img loading="lazy" src="images/arrow-right-up-long-line-primary.svg" alt="Arrow Right Up" class="card-button-icon">
+                  </div>
+                </div>
+              </div>
+              <div class="card-scroll card-scroll-secondary"></div>
+            </div>
+
+            <div class="row-content row-content-button">
+              <div class="card-row-text-wrapper">
+                <div class="card-row-text">
+                  <div>Read Post</div>
+                  <div class="card-icon-wrapper">
+                    <div class="card-icon-line"></div>
+                    <div class="card-icon-line card-icon-line-second"></div>
+                  </div>
+                </div>
+                <div class="card-row-text card-row-text-absolute">
+                  <div>Read Post</div>
+                  <div class="card-icon-wrapper card-icon-wrapper-alt">
+                    <div class="card-icon-line card-icon-line-alt"></div>
+                    <div class="card-icon-line card-icon-line-second card-icon-line-alt"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- card-row-bottom -->
+        </div> <!-- card-row-content -->
+        <!-- LINK TO DETAIL PAGE -->
+        <a href="{{ post.url | url }}" class="card-row-item-link card-row-item-link-blog w-inline-block"></a>
+      </div> <!-- card-row-item -->
+    </div> <!-- card-row (one post) -->
+    {% endfor %}
+
+  </div>
+</div>
+
                         <div class="w-dyn-empty">
                           <div>No items found.</div>
                         </div>
